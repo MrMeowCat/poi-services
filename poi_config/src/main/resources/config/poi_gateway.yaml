@@ -1,0 +1,4 @@
+# Default profile config
+
+server:
+  port: 8080

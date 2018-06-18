@@ -1,0 +1,4 @@
+# Default profile config
+
+server:
+  port: 10002

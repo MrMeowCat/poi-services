@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: poi_auth
+
+  # Config Server settings
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL}
+      fail-fast: true

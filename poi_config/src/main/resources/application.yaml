@@ -1,0 +1,13 @@
+server:
+  port: 10000
+
+# Configuration Server properties
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:config/
+
