@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: poi_registry
-
-  # Config Server settings
-  cloud:
-    config:
-      uri: ${CONFIG_SERVER_URL}
-      fail-fast: true
