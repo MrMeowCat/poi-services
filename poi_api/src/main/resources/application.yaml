@@ -1,0 +1,13 @@
+# Configuration for default profile
+
+server:
+  port: 10001
+
+spring:
+  profiles:
+    active: default
+  data:
+    mongodb:
+      database: poi_api_dev
+      host: 192.168.99.100
+      port: 27017
