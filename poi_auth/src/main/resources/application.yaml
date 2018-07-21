@@ -1,7 +1,7 @@
 # Configuration for default profile
 
 server:
-  port: 10001
+  port: 10002
 
 spring:
   profiles:

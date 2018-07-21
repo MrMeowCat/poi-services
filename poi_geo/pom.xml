@@ -12,11 +12,27 @@
     <artifactId>poi_geo</artifactId>
     <description>Points of Interest - Geo Service</description>
 
+    <properties>
+        <elastic.api.version>6.3.1</elastic.api.version>
+    </properties>
+
     <dependencies>
         <!--SPRING-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <!--ELASTICSEARCH-->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elastic.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>${elastic.api.version}</version>
         </dependency>
     </dependencies>
 </project>

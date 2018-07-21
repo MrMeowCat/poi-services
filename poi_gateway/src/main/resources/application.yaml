@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+
+      - id: poi_api
+        uri: http://localhost:10001
+        predicates:
+        - Path=/api/**
+        filters:
+        - RewritePath=/api/, /
+
+      - id: poi_auth
+        uri: http://localhost:10002
+        predicates:
+        - Path=/auth/**
+        filters:
+        - RewritePath=/auth/, /
+
+      - id: poi_geo
+        uri: http://localhost:10003
+        predicates:
+        - Path=/geo/**
+        filters:
+        - RewritePath=/geo/, /
