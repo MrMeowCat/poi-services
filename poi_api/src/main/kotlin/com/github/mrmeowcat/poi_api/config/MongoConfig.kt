@@ -2,10 +2,10 @@ package com.github.mrmeowcat.poi_api.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.config.EnableMongoAuditing
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @Configuration
-@EnableReactiveMongoRepositories
+@EnableMongoRepositories
 @EnableMongoAuditing
 class MongoConfig {
 }
