@@ -7,21 +7,21 @@ spring:
       routes:
 
       - id: poi_api
-        uri: http://localhost:10001
+        uri: ${API_SERVER_URL}
         predicates:
         - Path=/api/**
         filters:
         - RewritePath=/api/, /
 
       - id: poi_auth
-        uri: http://localhost:10002
+        uri: ${AUTH_SERVER_URL}
         predicates:
         - Path=/auth/**
         filters:
         - RewritePath=/auth/, /
 
       - id: poi_geo
-        uri: http://localhost:10003
+        uri: ${GEO_SERVER_URL}
         predicates:
         - Path=/geo/**
         filters:

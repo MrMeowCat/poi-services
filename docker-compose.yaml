@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  config:
+    build: ./poi_config
+    image: poi_config:1.0
+    ports:
+    - "10000:8080"
+
+  gateway:
+    build: ./poi_gateway
+    image: poi_gateway:1.0
+    ports:
+    - "8080:8080"
+    depends_on:
+    - config
+    - api
+    - auth
+    - geo
+    environment:
+    - CONFIG_SERVER_URL=http://config:8080
+    - API_SERVER_URL=http://api:8080
+    - AUTH_SERVER_URL=http://auth:8080
+    - GEO_SERVER_URL=http://geo:8080
+
+  api:
+    build: ./poi_api
+    image: poi_api:1.0
+    ports:
+    - "10001:8080"
+    depends_on:
+    - config
+    environment:
+    - CONFIG_SERVER_URL=http://config:8080
+    - MONGODB_HOST=mongodb
+
+  auth:
+    build: ./poi_auth
+    image: poi_auth:1.0
+    ports:
+    - "10002:8080"
+    depends_on:
+    - config
+    environment:
+    - CONFIG_SERVER_URL=http://config:8080
+    - MONGODB_HOST=mongodb
+
+  geo:
+    build: ./poi_geo
+    image: poi_geo:1.0
+    ports:
+    - "10003:8080"
+    depends_on:
+    - config
+    environment:
+    - CONFIG_SERVER_URL=http://config:8080
+
+  mongodb:
+    image: mvertes/alpine-mongo:latest
+    ports:
+    - "27017:27017"
