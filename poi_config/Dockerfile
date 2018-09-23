@@ -4,4 +4,4 @@ WORKDIR /home/app
 
 COPY target/poi_config-1.0.jar .
 
-ENTRYPOINT java -jar *.jar
+ENTRYPOINT java -Dserver.port=8080 -jar *.jar

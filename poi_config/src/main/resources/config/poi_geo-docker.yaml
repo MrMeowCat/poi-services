@@ -1,2 +1,8 @@
 server:
   port: 8080
+
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: ${ES_CLUSTER_NODE}
+      cluster-name: poi_geo_cluster
