@@ -1,28 +1,28 @@
 server:
   port: 8080
 
-spring:
-  cloud:
-    gateway:
-      routes:
+zuul:
+  routes:
+    poi_api:
+      path: /api/**
+      url: http://localhost:10001
+      strip-prefix: true
+      sensitiveHeaders:
+    poi_auth:
+      path: /auth/**
+      url: http://localhost:10002
+      strip-prefix: true
+      sensitiveHeaders:
+    poi_geo:
+      path: /geo/**
+      url: http://localhost:10003
+      strip-prefix: true
+      sensitiveHeaders:
 
-      - id: poi_api
-        uri: http://localhost:10001
-        predicates:
-        - Path=/api/**
-        filters:
-        - RewritePath=/api/, /
-
-      - id: poi_auth
-        uri: http://localhost:10002
-        predicates:
-        - Path=/auth/**
-        filters:
-        - RewritePath=/auth/, /
-
-      - id: poi_geo
-        uri: http://localhost:10003
-        predicates:
-        - Path=/geo/**
-        filters:
-        - RewritePath=/geo/, /
+oauth2:
+  client:
+    id: poi
+    secret: poi_secret
+    grantTypes: password
+    scopes: read, write
+    accessTokenUrl: /oauth/token
