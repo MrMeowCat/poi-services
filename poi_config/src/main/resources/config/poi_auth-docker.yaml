@@ -7,3 +7,13 @@ spring:
       database: poi_api_dev
       host: ${MONGODB_HOST}
       port: 27017
+
+oauth2:
+  jwt:
+    secret: jwt_secret
+    accessTokenAge: 360000
+  client:
+    id: poi
+    secret: poi_secret
+    grantTypes: password
+    scopes: read, write

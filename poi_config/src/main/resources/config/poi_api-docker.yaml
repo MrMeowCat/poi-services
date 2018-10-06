@@ -7,3 +7,7 @@ spring:
       database: poi_api_dev
       host: ${MONGODB_HOST}
       port: 27017
+
+oauth2:
+  jwt:
+    secret: jwt_secret
