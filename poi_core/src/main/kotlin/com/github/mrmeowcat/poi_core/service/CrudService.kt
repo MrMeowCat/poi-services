@@ -9,6 +9,11 @@ import java.io.Serializable
 interface CrudService<D : PersistentDto<ID>, ID : Serializable> {
 
     /**
+     * Finds all records.
+     */
+    fun findAll(): List<D>
+
+    /**
      * Finds a record by ID.
      */
     fun findById(id: ID?): D
@@ -37,4 +42,9 @@ interface CrudService<D : PersistentDto<ID>, ID : Serializable> {
      * Deletes a record.
      */
     fun delete(dto: D)
+
+    /**
+     * Deletes all records.
+     */
+    fun deleteAll()
 }

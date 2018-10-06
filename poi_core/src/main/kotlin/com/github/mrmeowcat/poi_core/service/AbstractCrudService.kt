@@ -12,8 +12,13 @@ import java.io.Serializable
  */
 abstract class AbstractCrudService<Doc : AbstractDocument<ID>, Dto : PersistentDto<ID>, ID : Serializable>(
         private val repository: CrudRepository<Doc, ID>,
-        private val mapper: Document2DtoMapper<Doc, Dto>)
+        private val mapper: Document2DtoMapper<Doc, Dto, ID>)
     : CrudService<Dto, ID> {
+
+    override fun findAll(): List<Dto> {
+        val documents: List<Doc> = repository.findAll().toList()
+        return documents.map { mapper.map(it)!! }
+    }
 
     override fun findById(id: ID?): Dto {
         if (id == null) {
@@ -49,5 +54,9 @@ abstract class AbstractCrudService<Doc : AbstractDocument<ID>, Dto : PersistentD
             throw NotFoundException()
         }
         repository.deleteById(dto.id!!)
+    }
+
+    override fun deleteAll() {
+        repository.deleteAll()
     }
 }
