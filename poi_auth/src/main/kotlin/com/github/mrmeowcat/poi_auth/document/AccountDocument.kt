@@ -1,13 +1,15 @@
 package com.github.mrmeowcat.poi_auth.document
 
+import com.github.mrmeowcat.poi_core.annotation.EnableVersioning
 import com.github.mrmeowcat.poi_core.document.AbstractDocument
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 
 /**
- * User document.
+ * User account document.
  */
 @Document(collection = "accounts")
+@EnableVersioning(collection = "accounts_versions")
 class AccountDocument : AbstractDocument<String>() {
     /**
      * Username.

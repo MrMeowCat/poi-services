@@ -1,13 +1,14 @@
 package com.github.mrmeowcat.poi_auth
 
-import com.github.mrmeowcat.poi_auth.document.AccountDocument
 import com.github.mrmeowcat.poi_auth.dto.Account
+import com.github.mrmeowcat.poi_auth.repository.AccountRepository
+import com.github.mrmeowcat.poi_auth.repository.versioning.AccountVersioningRepository
 import com.github.mrmeowcat.poi_auth.service.AccountService
-import com.github.mrmeowcat.poi_core.document.document
 import com.github.mrmeowcat.poi_core.dto.dto
-import com.github.mrmeowcat.poi_core.exception.NotFoundException
+import com.github.mrmeowcat.poi_core.exception.DocumentNotFoundException
 import org.junit.Assert
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.data.mongodb.config.EnableMongoAuditing
+import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
@@ -28,10 +31,20 @@ class AccountServiceTests {
     @Autowired
     lateinit var accountService: AccountService
 
+    @Autowired
+    lateinit var accountRepository: AccountRepository
+
+    @Autowired
+    lateinit var accountVersioningRepository: AccountVersioningRepository
+
+    @Autowired
+    lateinit var mongoTemplate: MongoTemplate
+
     @Test
     fun test01_clearAll() {
         accountService.deleteAll()
         assertEquals(0, accountService.findAll().size)
+        mongoTemplate.remove(Query(), "accounts_versions")
     }
 
     @Test
@@ -75,7 +88,7 @@ class AccountServiceTests {
         Assert.assertNotNull(account)
     }
 
-    @Test(expected = NotFoundException::class)
+    @Test(expected = DocumentNotFoundException::class)
     fun test05_findByIdFail() {
         accountService.findById("nonono")
     }
@@ -86,7 +99,7 @@ class AccountServiceTests {
         Assert.assertNotNull(account)
     }
 
-    @Test(expected = NotFoundException::class)
+    @Test(expected = DocumentNotFoundException::class)
     fun test07_findByIdUsername() {
         accountService.findByUsername(null)
     }
@@ -97,7 +110,7 @@ class AccountServiceTests {
         Assert.assertNotNull(account)
     }
 
-    @Test(expected = NotFoundException::class)
+    @Test(expected = DocumentNotFoundException::class)
     fun test09_findByIdEmailFail() {
         accountService.findByEmail(null)
     }
@@ -109,9 +122,13 @@ class AccountServiceTests {
         val version = account.version
         account.permissions = listOf("ADMIN", "USER")
         account = accountService.save(account)
+        assertNotNull(account.id)
         Assert.assertNotEquals(account.createdDate, account.modifiedDate)
         Assert.assertNotEquals(version, account.version)
         assertEquals(2, account.permissions.size)
+        val document = accountRepository.findById(account.id!!).get()
+        val previousVersion = accountVersioningRepository.getVersion(document, version)
+        assertNotNull(previousVersion)
     }
 
     @Test

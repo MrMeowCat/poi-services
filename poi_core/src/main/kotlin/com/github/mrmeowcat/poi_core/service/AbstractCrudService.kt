@@ -2,7 +2,7 @@ package com.github.mrmeowcat.poi_core.service
 
 import com.github.mrmeowcat.poi_core.document.AbstractDocument
 import com.github.mrmeowcat.poi_core.dto.PersistentDto
-import com.github.mrmeowcat.poi_core.exception.NotFoundException
+import com.github.mrmeowcat.poi_core.exception.DocumentNotFoundException
 import com.github.mrmeowcat.poi_core.mapper.Document2DtoMapper
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
@@ -22,9 +22,9 @@ abstract class AbstractCrudService<Doc : AbstractDocument<ID>, Dto : PersistentD
 
     override fun findById(id: ID?): Dto {
         if (id == null) {
-            throw NotFoundException()
+            throw DocumentNotFoundException("id: $id")
         }
-        val document: Doc = repository.findById(id).orElseThrow { NotFoundException() }
+        val document: Doc = repository.findById(id).orElseThrow { DocumentNotFoundException("id: $id") }
         return mapper.map(document)!!
     }
 
@@ -44,14 +44,14 @@ abstract class AbstractCrudService<Doc : AbstractDocument<ID>, Dto : PersistentD
 
     override fun delete(id: ID?) {
         if (!exists(id)) {
-            throw NotFoundException()
+            throw DocumentNotFoundException("id: $id")
         }
         repository.deleteById(id!!)
     }
 
     override fun delete(dto: Dto) {
         if (!exists(dto)) {
-            throw NotFoundException()
+            throw DocumentNotFoundException("id: ${dto.id}")
         }
         repository.deleteById(dto.id!!)
     }
