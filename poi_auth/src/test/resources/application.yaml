@@ -1,0 +1,16 @@
+spring:
+  data:
+    mongodb:
+      database: poi_auth_test
+      host: 192.168.99.100
+      port: 27017
+
+oauth2:
+  jwt:
+    secret: jwt_secret
+    accessTokenAge: 360000
+  client:
+    id: poi
+    secret: poi_secret
+    grantTypes: password
+    scopes: read, write
