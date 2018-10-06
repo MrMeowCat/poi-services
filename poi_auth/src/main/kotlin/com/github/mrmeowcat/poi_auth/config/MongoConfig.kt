@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @Configuration
-@EnableMongoRepositories
+@EnableMongoRepositories("com.github.mrmeowcat.poi_auth.repository")
 @EnableMongoAuditing
-class MongoConfig {
-}
+class MongoConfig

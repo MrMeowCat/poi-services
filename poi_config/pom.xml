@@ -11,6 +11,7 @@
 
     <artifactId>poi_config</artifactId>
     <description>Points of Interest - Config Server</description>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>

@@ -11,12 +11,20 @@
 
     <artifactId>poi_geo</artifactId>
     <description>Points of Interest - Geo Service</description>
+    <version>1.0</version>
+    <packaging>jar</packaging>
 
     <properties>
         <elastic.api.version>6.3.1</elastic.api.version>
     </properties>
 
     <dependencies>
+        <!--POI CORE-->
+        <dependency>
+            <groupId>com.github.mrmeowcat</groupId>
+            <artifactId>poi_core</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!--SPRING-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

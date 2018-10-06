@@ -12,6 +12,7 @@
         <module>poi_auth</module>
         <module>poi_api</module>
         <module>poi_geo</module>
+        <module>poi_core</module>
     </modules>
     <packaging>pom</packaging>
 
