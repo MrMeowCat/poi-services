@@ -31,7 +31,7 @@ class OAuth2ResourceConfig(private val jwtAccessTokenConverter: JwtAccessTokenCo
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/oauth/token").permitAll()
-                .antMatchers("/register").permitAll()
+                .antMatchers("/v1/registration").permitAll()
                 .anyRequest().authenticated()
     }
 }

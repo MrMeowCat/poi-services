@@ -11,51 +11,51 @@ interface RegistrationService {
     /**
      * Error codes.
      */
-    enum class ErrorCodes(val code: Int) {
+    enum class ErrorCodes {
         /**
          * Credentials are empty.
          */
-        EMPTY(1),
+        EMPTY,
         /**
          * Username is empty.
          */
-        USERNAME_EMPTY(2),
+        USERNAME_EMPTY,
         /**
          * Email is empty.
          */
-        EMAIL_EMPTY(3),
+        EMAIL_EMPTY,
         /**
          * Password is empty.
          */
-        PASSWORD_EMPTY(4),
+        PASSWORD_EMPTY,
         /**
          * Confirm is empty.
          */
-        CONFIRM_EMPTY(5),
+        CONFIRM_EMPTY,
         /**
          * Password and confirm do not match.
          */
-        PASSWORD_MISMATCH(6),
+        PASSWORD_MISMATCH,
         /**
          * Username is incorrect.
          */
-        USERNAME_INCORRECT(7),
+        USERNAME_INCORRECT,
         /**
          * Email is incorrect.
          */
-        EMAIL_INCORRECT(8),
+        EMAIL_INCORRECT,
         /**
          * Password is incorrect.
          */
-        PASSWORD_INCORRECT(9),
+        PASSWORD_INCORRECT,
         /**
          * Username exists.
          */
-        USERNAME_EXISTS(10),
+        USERNAME_EXISTS,
         /**
          * Email exists.
          */
-        EMAIL_EXISTS(11),
+        EMAIL_EXISTS
     }
 
     /**
