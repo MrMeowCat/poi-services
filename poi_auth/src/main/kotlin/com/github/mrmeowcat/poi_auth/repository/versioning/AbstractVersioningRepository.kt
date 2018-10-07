@@ -25,6 +25,15 @@ abstract class AbstractVersioningRepository<D : AbstractDocument<ID>, ID : Seria
     : VersioningRepository<D, ID> {
 
     /**
+     * Document fields.
+     */
+    private companion object {
+        private const val MONGO_ID_FIELD = "_id"
+        private const val ID_FIELD = "id"
+        private const val VERSION_FIELD = "version"
+    }
+
+    /**
      * Mongo template.
      */
     @Autowired
@@ -37,11 +46,11 @@ abstract class AbstractVersioningRepository<D : AbstractDocument<ID>, ID : Seria
     override fun getVersion(document: D, version: Int): D {
         val collection: String = getCollection(document)
         val query = Query()
-        query.addCriteria(Criteria.where("id").`is`(document.id))
-        query.addCriteria(Criteria.where("version").`is`(version))
+        query.addCriteria(Criteria.where(ID_FIELD).`is`(document.id))
+        query.addCriteria(Criteria.where(VERSION_FIELD).`is`(version))
         val versionDocument: Document? = mongoTemplate.findOne(query, Document::class.java, collection)
         versionDocument ?: throw VersionNotFoundException("id: ${document.id}, version: $version")
-        versionDocument.remove("_id")
+        versionDocument.remove(MONGO_ID_FIELD)
         return objectMapper.convertValue(versionDocument, document::class.java)
     }
 
@@ -54,8 +63,8 @@ abstract class AbstractVersioningRepository<D : AbstractDocument<ID>, ID : Seria
     override fun deleteVersion(document: D, version: Int) {
         val collection: String = getCollection(document)
         val query = Query()
-        query.addCriteria(Criteria.where("id").`is`(document.id))
-        query.addCriteria(Criteria.where("version").`is`(version))
+        query.addCriteria(Criteria.where(ID_FIELD).`is`(document.id))
+        query.addCriteria(Criteria.where(VERSION_FIELD).`is`(version))
         if (mongoTemplate.remove(query, collection).deletedCount == 0L) {
             throw VersionNotFoundException("id: ${document.id}, version: $version")
         }

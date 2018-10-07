@@ -116,7 +116,19 @@ class AccountServiceTests {
     }
 
     @Test
-    fun test10_saveAccount() {
+    fun test10_existsByUsername() {
+        Assert.assertTrue(accountService.existsByUsername("1"))
+        Assert.assertFalse(accountService.existsByUsername("3"))
+    }
+
+    @Test
+    fun test11_existsByEmail() {
+        Assert.assertTrue(accountService.existsByEmail("1"))
+        Assert.assertFalse(accountService.existsByEmail("3"))
+    }
+
+    @Test
+    fun test12_saveAccount() {
         val accounts = accountService.findAll()
         var account = accounts[0]
         val version = account.version
@@ -132,7 +144,7 @@ class AccountServiceTests {
     }
 
     @Test
-    fun test11_deleteAccount() {
+    fun test13_deleteAccount() {
         val accounts = accountService.findAll()
         val id = accounts[0].id
         accountService.delete(id!!)
@@ -140,7 +152,7 @@ class AccountServiceTests {
     }
 
     @Test
-    fun test12_accountExists() {
+    fun test14_accountExists() {
         val accounts = accountService.findAll()
         val id = accounts[0].id
         Assert.assertTrue(accountService.exists(id!!))

@@ -18,4 +18,14 @@ interface AccountRepository : MongoRepository<AccountDocument, String> {
      * Finds Account by email.
      */
     fun findByEmail(email: String?): Optional<AccountDocument>
+
+    /**
+     * Checks if Account exists by username.
+     */
+    fun existsByUsername(username: String?): Boolean
+
+    /**
+     * Checks if Account exists by email.
+     */
+    fun existsByEmail(email: String?): Boolean
 }

@@ -101,7 +101,19 @@ class AccountRepositoryTests {
     }
 
     @Test
-    fun test10_saveAccount() {
+    fun test10_existsByUsername() {
+        assertTrue(accountRepository.existsByUsername("1"))
+        assertFalse(accountRepository.existsByUsername("3"))
+    }
+
+    @Test
+    fun test11_existsByEmail() {
+        assertTrue(accountRepository.existsByEmail("1"))
+        assertFalse(accountRepository.existsByEmail("3"))
+    }
+
+    @Test
+    fun test12_saveAccount() {
         val accounts = accountRepository.findAll()
         var account = accounts[0]
         val version = account.version
@@ -113,7 +125,7 @@ class AccountRepositoryTests {
     }
 
     @Test
-    fun test11_deleteAccount() {
+    fun test13_deleteAccount() {
         val accounts = accountRepository.findAll()
         val id = accounts[0].id
         accountRepository.deleteById(id!!)
@@ -121,7 +133,7 @@ class AccountRepositoryTests {
     }
 
     @Test
-    fun test12_accountExists() {
+    fun test14_accountExists() {
         val accounts = accountRepository.findAll()
         val id = accounts[0].id
         assertTrue(accountRepository.existsById(id!!))

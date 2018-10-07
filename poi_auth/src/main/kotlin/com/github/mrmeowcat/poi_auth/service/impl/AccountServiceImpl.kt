@@ -35,6 +35,14 @@ class AccountServiceImpl(
         return accountMapper.map(account)!!
     }
 
+    override fun existsByUsername(username: String?): Boolean {
+        return accountRepository.existsByUsername(username)
+    }
+
+    override fun existsByEmail(email: String?): Boolean {
+        return accountRepository.existsByEmail(email)
+    }
+
     override fun save(dto: Account): Account {
         val accountDocument: AccountDocument = accountMapper.map(dto)!!
         val savedDocument: AccountDocument = accountRepository.save(accountDocument)

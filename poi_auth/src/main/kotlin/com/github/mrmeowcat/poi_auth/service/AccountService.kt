@@ -17,4 +17,14 @@ interface AccountService : CrudService<Account, String> {
      * Finds Account by email.
      */
     fun findByEmail(email: String?): Account
+
+    /**
+     * Checks if Account exists by username.
+     */
+    fun existsByUsername(username: String?): Boolean
+
+    /**
+     * Checks if Account exists by email.
+     */
+    fun existsByEmail(email: String?): Boolean
 }

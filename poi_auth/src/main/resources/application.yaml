@@ -17,3 +17,9 @@ oauth2:
     secret: poi_secret
     grantTypes: password
     scopes: read, write
+
+registration:
+  excludedNames: 'null'
+  nameMaxLength: 20
+  emailPattern: "[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+  passwordPattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$"
