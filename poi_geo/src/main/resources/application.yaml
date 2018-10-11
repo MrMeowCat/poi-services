@@ -6,6 +6,14 @@ spring:
     elasticsearch:
       cluster-nodes: 192.168.99.100:9300
       cluster-name: poi_geo_cluster
+  cloud:
+    stream:
+      bindings:
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: guest
+    password: guest
 
 oauth2:
   jwt:

@@ -7,6 +7,14 @@ spring:
       database: poi_auth_dev
       host: 192.168.99.100
       port: 27017
+  cloud:
+    stream:
+      bindings:
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: guest
+    password: guest
 
 oauth2:
   jwt:

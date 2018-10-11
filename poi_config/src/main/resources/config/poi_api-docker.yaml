@@ -7,6 +7,14 @@ spring:
       database: poi_api_dev
       host: ${MONGODB_HOST}
       port: 27017
+  cloud:
+    stream:
+      bindings:
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: 5672
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
 
 oauth2:
   jwt:
